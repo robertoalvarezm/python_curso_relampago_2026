@@ -1,0 +1,194 @@
+---
+title: "Sentencias If — Control de Flujo"
+subtitle: "Python Crash Course — Capítulo 5"
+author: "Basado en Eric Matthes"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    highlight-style: github
+    theme: cosmo
+  pdf:
+    toc: true
+jupyter: python3
+---
+
+> **Nivel:** Programadores con experiencia en otro lenguaje  
+> **Capítulo:** 5 — Condicionales y lógica booleana
+
+
+## 🎯 Objetivos
+- Escribir tests condicionales
+- Usar if, elif y else
+- Combinar condiciones con and/or/not
+- Aplicar condicionales en listas
+
+::: {.callout-tip title="Para quien ya programa"}
+La sintaxis es similar a otros lenguajes pero sin paréntesis obligatorios en la condición y sin llaves. La **indentación es parte de la gramática**. Python usa `and`, `or`, `not` en lugar de `&&`, `||`, `!`.
+:::
+
+## 5.1 Estructura Básica
+
+```{python}
+edad = 22
+
+if edad < 13:
+    print("Niño/a")
+elif edad < 18:
+    print("Adolescente")
+elif edad < 65:
+    print("Adulto/a")
+else:
+    print("Adulto/a mayor")
+```
+
+```{python}
+# Operadores de comparación
+lenguaje = "python"
+
+print(lenguaje == "python")           # True
+print(lenguaje == "Python")           # False (case-sensitive!)
+print(lenguaje.lower() == "python")   # True (solución)
+print(lenguaje != "java")             # True
+
+# Verificar pertenencia a colección
+lenguajes_web = ['javascript', 'python', 'php']
+print("python" in lenguajes_web)      # True
+print("java" not in lenguajes_web)    # True
+```
+
+## 5.2 Operadores Lógicos
+
+```{python}
+# and, or, not
+temperatura = 25
+humedad = 80
+
+if temperatura > 20 and humedad < 60:
+    print("Clima agradable")
+elif temperatura > 20 and humedad >= 60:
+    print("Caluroso y húmedo")
+
+# Operador ternario
+edad = 20
+estado = "mayor de edad" if edad >= 18 else "menor de edad"
+print(f"Con {edad} años, eres {estado}")
+```
+
+## 5.3 Valores Truthy y Falsy
+
+```{python}
+# En Python estos valores son Falsy: False, None, 0, 0.0, "", [], {}, ()
+# El resto son Truthy
+
+nombre = ""
+if nombre:
+    print(f"Hola, {nombre}")
+else:
+    print("No se proporcionó nombre")  # Se ejecuta esto
+
+lista = [1, 2, 3]
+if lista:
+    print(f"Hay {len(lista)} elementos")  # Se ejecuta esto
+```
+
+---
+
+## ✏️ Ejercicios Prácticos
+
+### Ejercicio 5.1: Clasificador de Números
+
+```{python}
+def clasificar_numero(n):
+    propiedades = []
+    
+    if n > 0:
+        propiedades.append("positivo")
+    elif n < 0:
+        propiedades.append("negativo")
+    else:
+        propiedades.append("cero")
+    
+    if n != 0:
+        propiedades.append("par" if n % 2 == 0 else "impar")
+        if n % 3 == 0:
+            propiedades.append("múltiplo de 3")
+    
+    return propiedades
+
+for num in [-9, -2, 0, 1, 6, 17, 100]:
+    props = clasificar_numero(num)
+    print(f"{num:4d}: {', '.join(props)}")
+```
+
+### Ejercicio 5.2: Control de Acceso
+
+```{python}
+usuarios_admin = ['admin', 'superuser']
+usuarios_activos = ['admin', 'ana', 'carlos']
+usuarios_baneados = ['hacker', 'spammer']
+
+def verificar_acceso(usuario, seccion):
+    usuario = usuario.lower()
+    if usuario in usuarios_baneados:
+        return "🚫 DENEGADO — Baneado"
+    if usuario not in usuarios_activos:
+        return "❌ DENEGADO — No registrado"
+    if seccion == "admin" and usuario not in usuarios_admin:
+        return "⚠️  DENEGADO — Sin permisos"
+    return f"✅ CONCEDIDO — Sección '{seccion}'"
+
+pruebas = [('admin', 'admin'), ('ana', 'admin'), ('hacker', 'usuario')]
+for usuario, seccion in pruebas:
+    print(f"'{usuario}' → '{seccion}': {verificar_acceso(usuario, seccion)}")
+```
+
+---
+
+## 🚀 Mini Proyecto: Calculadora de IMC
+
+```{python}
+def calcular_imc(peso_kg, altura_m):
+    imc = peso_kg / (altura_m ** 2)
+    
+    if imc < 18.5:
+        clasif, emoji = "Bajo peso", "⬇️"
+    elif imc < 25:
+        clasif, emoji = "Peso normal", "✅"
+    elif imc < 30:
+        clasif, emoji = "Sobrepeso", "⚠️"
+    else:
+        clasif, emoji = "Obesidad", "🔴"
+    
+    return imc, clasif, emoji
+
+personas = [("Ana", 55, 1.65), ("Carlos", 80, 1.75), ("Beatriz", 90, 1.60)]
+
+for nombre, peso, altura in personas:
+    imc, clasif, emoji = calcular_imc(peso, altura)
+    print(f"{emoji} {nombre}: IMC {imc:.1f} — {clasif}")
+```
+
+---
+
+## 🏆 Desafíos
+
+::: {.callout-warning title="Desafío 1"}
+Crea un verificador de contraseñas: debe tener más de 8 caracteres, al menos una mayúscula, un número y un símbolo especial.
+:::
+
+::: {.callout-warning title="Desafío 2"}
+Implementa FizzBuzz: números 1-50, imprime "Fizz" si múltiplo de 3, "Buzz" si múltiplo de 5, "FizzBuzz" si ambos.
+:::
+
+---
+
+## 📝 Autoevaluación
+
+| Pregunta | Tu Respuesta |
+|---|---|
+| ¿Python usa `&&` o `and`? | |
+| Da 3 valores Falsy en Python | |
+| ¿Sintaxis del operador ternario? | |
+| ¿Cómo verificas si algo NO está en una lista? | |

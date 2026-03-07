@@ -1,0 +1,196 @@
+---
+title: "Variables y Tipos de Datos"
+subtitle: "Python Crash Course — Capítulo 2"
+author: "Basado en Eric Matthes"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    highlight-style: github
+    theme: cosmo
+  pdf:
+    toc: true
+jupyter: python3
+---
+
+> **Nivel:** Programadores con experiencia en otro lenguaje  
+> **Capítulo:** 2 — Variables, Strings y Números
+
+
+## 🎯 Objetivos
+- Crear y usar variables con tipado dinámico
+- Manipular strings con métodos
+- Trabajar con enteros y flotantes
+- Usar f-strings para formateo
+
+::: {.callout-tip title="Para quien ya programa"}
+Python usa **tipado dinámico**: no declaras el tipo de la variable. El intérprete lo infiere. No hay `int x = 5;` sino simplemente `x = 5`. El tipo puede cambiar en tiempo de ejecución.
+:::
+
+## 2.1 Variables y Tipado Dinámico
+
+```{python}
+# En Java: String mensaje = "Hola";
+# En Python:
+mensaje = "Hola Python"
+print(mensaje)
+print(type(mensaje))  # <class 'str'>
+
+# El tipo cambia dinámicamente
+x = 42
+print(type(x))   # int
+x = 3.14
+print(type(x))   # float
+x = "texto"
+print(type(x))   # str
+```
+
+## 2.2 Strings y sus Métodos
+
+```{python}
+nombre = "  ana patricia  "
+
+# Métodos de transformación
+print(nombre.title())    # Cada palabra capitalizada
+print(nombre.upper())    # Todo mayúsculas  
+print(nombre.lower())    # Todo minúsculas
+print(nombre.strip())    # Elimina espacios al inicio/final
+```
+
+```{python}
+# f-strings — interpolación de variables (Python 3.6+)
+nombre = "María"
+edad = 25
+ciudad = "CDMX"
+
+presentacion = f"Me llamo {nombre}, tengo {edad} años y vivo en {ciudad}."
+print(presentacion)
+print(f"En 5 años tendré {edad + 5} años")
+print(f"Nombre en mayúsculas: {nombre.upper()}")
+```
+
+## 2.3 Números
+
+```{python}
+# Enteros (int) — sin límite de tamaño en Python
+a = 1_000_000    # _ como separador de miles (Python 3.6+)
+b = 0xFF         # Hexadecimal
+c = 0b1010       # Binario
+
+print(f"Decimal: {a:,}")
+print(f"Hex 0xFF = {b}")
+print(f"Bin 0b1010 = {c}")
+
+# Operaciones
+print(f"2^32 = {2**32:,}")
+```
+
+```{python}
+# Flotantes y precisión
+precio = 9.99
+iva = 0.16
+total = precio * (1 + iva)
+
+print(f"Precio: ${precio}")
+print(f"IVA: ${precio * iva:.2f}")
+print(f"Total: ${total:.2f}")
+
+# Nota: precisión flotante (común en todos los lenguajes)
+print(f"0.1 + 0.2 = {0.1 + 0.2}")        # No es exactamente 0.3!
+print(f"Redondeado: {round(0.1 + 0.2, 1)}")  # Solución
+```
+
+---
+
+## ✏️ Ejercicios Prácticos
+
+### Ejercicio 2.1: Limpieza de Strings
+
+```{python}
+nombre_sucio = "  jUaN pEDro GoNZÁLEz  "
+
+# 1. Limpia espacios
+# 2. Convierte a título
+# 3. Extrae primer nombre en mayúsculas
+limpio = nombre_sucio.strip()
+en_titulo = limpio.title()
+primer_nombre = en_titulo.split()[0].upper()
+
+print(f"Original: '{nombre_sucio}'")
+print(f"Limpio:   '{limpio}'")
+print(f"Título:   '{en_titulo}'")
+print(f"1er nombre: '{primer_nombre}'")
+```
+
+### Ejercicio 2.2: Factura Formateada
+
+```{python}
+producto = "Laptop"
+precio_unitario = 15999.99
+cantidad = 2
+descuento = 0.10
+iva = 0.16
+
+subtotal = precio_unitario * cantidad
+monto_descuento = subtotal * descuento
+precio_con_descuento = subtotal - monto_descuento
+monto_iva = precio_con_descuento * iva
+total = precio_con_descuento + monto_iva
+
+print("=" * 45)
+print(f"{'FACTURA':^45}")
+print("=" * 45)
+print(f"Producto: {producto}")
+print(f"Subtotal:         ${subtotal:>12,.2f}")
+print(f"Descuento (10%):  ${monto_descuento:>12,.2f}")
+print(f"IVA (16%):        ${monto_iva:>12,.2f}")
+print("-" * 45)
+print(f"TOTAL:            ${total:>12,.2f}")
+print("=" * 45)
+```
+
+---
+
+## 🚀 Mini Proyecto: Conversor de Unidades
+
+```{python}
+print("=== CONVERSOR DE UNIDADES ===")
+
+# Temperatura
+celsius = 100
+fahrenheit = (celsius * 9/5) + 32
+kelvin = celsius + 273.15
+print(f"\nTEMPERATURA")
+print(f"  {celsius}°C = {fahrenheit}°F = {kelvin}K")
+
+# Distancia (maratón)
+km = 42.195
+metros = km * 1000
+millas = km * 0.621371
+print(f"\nDISTANCIA (Maratón)")
+print(f"  {km} km = {metros:.0f} m = {millas:.2f} millas")
+```
+
+---
+
+## 🏆 Desafíos
+
+::: {.callout-warning title="Desafío 1"}
+Crea un generador de contraseñas con el formato: `[Inicial_nombre][Año][Símbolo][4_letras_apellido]`
+:::
+
+::: {.callout-warning title="Desafío 2"}
+Investiga el tipo `complex` de Python. Calcula `(3+4j) * (1-2j)`.
+:::
+
+---
+
+## 📝 Autoevaluación
+
+| Pregunta | Tu Respuesta |
+|---|---|
+| ¿Python es de tipado estático o dinámico? | |
+| ¿Diferencia entre `//` y `/`? | |
+| ¿Qué hace `.strip()`? | |
+| ¿Cómo insertas una variable en un string? | |

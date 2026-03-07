@@ -1,0 +1,193 @@
+---
+title: "Introducción a las Listas"
+subtitle: "Python Crash Course — Capítulo 3"
+author: "Basado en Eric Matthes"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    highlight-style: github
+    theme: cosmo
+  pdf:
+    toc: true
+jupyter: python3
+---
+
+> **Nivel:** Programadores con experiencia en otro lenguaje  
+> **Capítulo:** 3 — Crear, modificar y organizar listas
+
+
+## 🎯 Objetivos
+- Crear listas y acceder a sus elementos
+- Modificar, agregar y eliminar elementos
+- Usar métodos de ordenamiento
+- Trabajar con slicing
+
+::: {.callout-tip title="Para quien ya programa"}
+Las listas de Python son como `ArrayList` en Java o `vector` en C++. Se redimensionan automáticamente, permiten mezclar tipos y tienen muchos métodos útiles incorporados. El acceso por índice es idéntico — empieza en 0.
+:::
+
+## 3.1 Crear y Acceder
+
+```{python}
+lenguajes = ['Python', 'Java', 'C++', 'JavaScript', 'Go']
+print(lenguajes)
+print(f"Tipo: {type(lenguajes)}")
+print(f"Longitud: {len(lenguajes)}")
+```
+
+```{python}
+frutas = ['manzana', 'banana', 'cereza', 'durazno', 'fresa']
+
+# Acceso por índice
+print(frutas[0])    # Primera
+print(frutas[-1])   # Última (índice negativo)
+print(frutas[-2])   # Penúltima
+
+# Slicing [inicio:fin:paso]
+print(frutas[1:3])   # Elementos en índice 1 y 2
+print(frutas[:3])    # Primeros 3
+print(frutas[2:])    # Desde índice 2
+print(frutas[::-1])  # Lista al revés
+```
+
+## 3.2 Modificar Listas
+
+```{python}
+colores = ['rojo', 'verde', 'azul']
+print(f"Original: {colores}")
+
+colores[1] = 'amarillo'          # Modificar elemento
+colores.append('morado')          # Agregar al final
+colores.insert(1, 'naranja')      # Insertar en posición
+
+print(f"Modificado: {colores}")
+```
+
+```{python}
+numeros = [1, 2, 3, 4, 5, 3, 6]
+
+del numeros[0]              # Eliminar por índice
+numeros.remove(3)           # Eliminar primera ocurrencia
+ultimo = numeros.pop()      # Eliminar y retornar último
+segundo = numeros.pop(1)    # Eliminar por índice y retornar
+
+print(f"Lista final: {numeros}")
+print(f"Elementos eliminados: {ultimo}, {segundo}")
+```
+
+## 3.3 Ordenar
+
+```{python}
+autos = ['bmw', 'audi', 'toyota', 'ford']
+
+# .sort() modifica la lista original
+autos.sort()
+print(f"A-Z: {autos}")
+
+autos.sort(reverse=True)
+print(f"Z-A: {autos}")
+
+# sorted() retorna nueva lista (no modifica la original)
+frutas = ['cereza', 'manzana', 'banana']
+print(f"Original: {frutas}")
+print(f"Ordenado: {sorted(frutas)}")
+print(f"Original intacto: {frutas}")
+```
+
+---
+
+## ✏️ Ejercicios Prácticos
+
+### Ejercicio 3.1: Lista de Invitados
+
+```{python}
+invitados = ['María', 'Carlos', 'Ana', 'Pedro']
+
+# 1. Mensaje personalizado para cada invitado
+for invitado in invitados:
+    print(f"Estimado/a {invitado}, te invitamos a nuestra cena.")
+
+# 2. Reemplazar Pedro por Laura
+invitados[invitados.index('Pedro')] = 'Laura'
+
+# 3. Agregar más personas
+invitados.append('Roberto')
+invitados.insert(0, 'Elena')
+
+print(f"\nLista final: {invitados}")
+print(f"Total: {len(invitados)} invitados")
+```
+
+### Ejercicio 3.2: Gestión de Tareas
+
+```{python}
+tareas = ['Revisar email', 'Escribir reporte', 'Reunión 3pm', 
+          'Almorzar', 'Revisar código']
+
+print("=== TAREAS PENDIENTES ===")
+for i, tarea in enumerate(tareas, 1):
+    print(f"{i}. {tarea}")
+
+completada = tareas.pop(0)
+print(f"\n✅ Completada: {completada}")
+print(f"Quedan {len(tareas)} tareas")
+```
+
+---
+
+## 🚀 Mini Proyecto: Lista de Compras Inteligente
+
+```{python}
+lista_compras = []
+productos_iniciales = [
+    ('Leche', 2), ('Pan', 1), ('Huevos', 12),
+    ('Manzanas', 6), ('Yogur', 4)
+]
+
+for producto, cantidad in productos_iniciales:
+    lista_compras.append(f"{cantidad}x {producto}")
+
+print("=== LISTA DE COMPRAS ===")
+for item in sorted(lista_compras):
+    print(f"  ☐ {item}")
+
+comprados = ['2x Leche', '1x Pan']
+pendientes = [item for item in lista_compras if item not in comprados]
+
+print(f"\n=== PENDIENTES ({len(pendientes)}) ===")
+for item in pendientes:
+    print(f"  ☐ {item}")
+
+print(f"\n=== COMPRADOS ({len(comprados)}) ===")
+for item in comprados:
+    print(f"  ✅ {item}")
+```
+
+---
+
+## 🏆 Desafíos
+
+::: {.callout-warning title="Desafío 1"}
+Genera los primeros 20 números de Fibonacci usando solo operaciones de listas.
+:::
+
+::: {.callout-warning title="Desafío 2"}
+Elimina duplicados de `[3,1,4,1,5,9,2,6,5,3,5]` usando solo métodos de lista.
+:::
+
+::: {.callout-warning title="Desafío 3"}
+Invierte una lista sin usar `.reverse()` ni `[::-1]`. Úsalo solo con `.pop()` y `.append()`.
+:::
+
+---
+
+## 📝 Autoevaluación
+
+| Pregunta | Tu Respuesta |
+|---|---|
+| ¿Cuál es el índice del último elemento de una lista de 5? | |
+| ¿Diferencia entre `.sort()` y `sorted()`? | |
+| ¿Qué retorna `.pop()`? | |
+| ¿Cómo obtienes los últimos 3 elementos con slicing? | |

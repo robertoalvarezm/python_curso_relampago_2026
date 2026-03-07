@@ -1,0 +1,246 @@
+---
+title: "Funciones"
+subtitle: "Python Crash Course — Capítulo 8"
+author: "Basado en Eric Matthes"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    highlight-style: github
+    theme: cosmo
+  pdf:
+    toc: true
+jupyter: python3
+---
+
+> **Nivel:** Programadores con experiencia en otro lenguaje  
+> **Capítulo:** 8 — Definir, parametrizar y modularizar código
+
+
+## 🎯 Objetivos
+- Definir y llamar funciones
+- Usar parámetros posicionales, keyword y por defecto
+- Retornar valores simples y múltiples
+- Usar `*args` y `**kwargs`
+- Documentar con docstrings
+
+::: {.callout-tip title="Para quien ya programa"}
+Las funciones en Python son **ciudadanos de primera clase**: pueden asignarse a variables, pasarse como argumentos y retornarse desde otras funciones (funciones de orden superior). Las funciones `lambda` son equivalentes a funciones anónimas o arrow functions.
+:::
+
+## 7.1 Definición Básica
+
+```{python}
+def saludar():
+    """Muestra un saludo simple."""
+    print("¡Hola desde la función!")
+
+saludar()
+saludar()
+
+# Leer el docstring
+print(saludar.__doc__)
+```
+
+```{python}
+# Parámetros con valor por defecto
+def saludar_persona(nombre, lenguaje="Python"):
+    """Saluda a una persona."""
+    print(f"Hola, {nombre}! Programas en {lenguaje}.")
+
+saludar_persona("Ana")                       # Usa valor por defecto
+saludar_persona("Carlos", "Java")            # Argumento posicional
+saludar_persona("Beatriz", lenguaje="Go")    # Argumento keyword
+saludar_persona(lenguaje="Rust", nombre="Diego")  # Orden flexible
+```
+
+## 7.2 Retorno de Valores
+
+```{python}
+# Retorno simple
+def area_rectangulo(ancho, alto):
+    """Calcula el área de un rectángulo."""
+    return ancho * alto
+
+print(f"Área: {area_rectangulo(10, 5)} m²")
+
+# Retorno múltiple (como tupla)
+def estadisticas(numeros):
+    """Retorna min, max y promedio."""
+    return min(numeros), max(numeros), sum(numeros) / len(numeros)
+
+datos = [15, 8, 23, 42, 4, 16]
+minimo, maximo, promedio = estadisticas(datos)
+print(f"Min: {minimo}, Max: {maximo}, Promedio: {promedio:.1f}")
+```
+
+## 7.3 *args y **kwargs
+
+```{python}
+# *args — número variable de argumentos posicionales
+def sumar(*numeros):
+    """Suma cualquier cantidad de números."""
+    return sum(numeros)
+
+print(sumar(1, 2))
+print(sumar(1, 2, 3, 4, 5))
+
+# **kwargs — número variable de argumentos keyword
+def mostrar_info(**datos):
+    """Muestra información dinámica."""
+    for clave, valor in datos.items():
+        print(f"  {clave}: {valor}")
+
+mostrar_info(nombre="Ana", edad=28, ciudad="Madrid")
+```
+
+## 7.4 Funciones como Objetos y Lambda
+
+```{python}
+# Funciones son objetos — pueden pasarse como argumentos
+numeros = [3, 1, 4, 1, 5, 9, 2, 6]
+
+print(sorted(numeros))                        # Orden natural
+print(sorted(numeros, key=lambda x: -x))      # Orden descendente
+
+# Lambda — función anónima
+cuadrado = lambda x: x ** 2
+print(cuadrado(7))
+
+# Aplicado a nombres
+nombres = ['Ana', 'carlos', 'Beatriz', 'diego']
+print(sorted(nombres, key=lambda n: n.lower()))
+```
+
+---
+
+## ✏️ Ejercicios Prácticos
+
+### Ejercicio 7.1: Calculadora Modular
+
+```{python}
+def suma(a, b): return a + b
+def resta(a, b): return a - b
+def multiplicacion(a, b): return a * b
+
+def division(a, b):
+    """División con manejo de error."""
+    if b == 0:
+        return "Error: División por cero"
+    return a / b
+
+def potencia(base, exp=2):
+    return base ** exp
+
+operaciones = [
+    ("Suma 15 + 8", suma(15, 8)),
+    ("Resta 20 - 7", resta(20, 7)),
+    ("Mult. 6 × 9", multiplicacion(6, 9)),
+    ("Div 100 ÷ 4", division(100, 4)),
+    ("Div 5 ÷ 0", division(5, 0)),
+    ("3²", potencia(3)),
+    ("2¹⁰", potencia(2, 10)),
+]
+
+print(f"{'Operación':<25} {'Resultado':>10}")
+print("-" * 37)
+for nombre, resultado in operaciones:
+    print(f"{nombre:<25} {str(resultado):>10}")
+```
+
+### Ejercicio 7.2: Procesador de Texto
+
+```{python}
+def contar_palabras(texto):
+    return len(texto.split())
+
+def contar_vocales(texto):
+    return sum(1 for c in texto if c in 'aeiouáéíóúAEIOUÁÉÍÓÚ')
+
+def es_palindromo(texto):
+    limpio = ''.join(c.lower() for c in texto if c.isalpha())
+    return limpio == limpio[::-1]
+
+def invertir_palabras(texto):
+    return ' '.join(reversed(texto.split()))
+
+textos = ["Anita lava la tina", "Python es genial", "A man a plan a canal Panama"]
+
+for texto in textos:
+    print(f"\n📝 '{texto}'")
+    print(f"   Palabras: {contar_palabras(texto)}")
+    print(f"   Vocales: {contar_vocales(texto)}")
+    print(f"   ¿Palíndromo? {'Sí' if es_palindromo(texto) else 'No'}")
+    print(f"   Invertido: '{invertir_palabras(texto)}'")
+```
+
+---
+
+## 🚀 Mini Proyecto: Sistema de Biblioteca
+
+```{python}
+biblioteca = {}
+
+def agregar_libro(titulo, autor, anio, copias=1):
+    clave = titulo.lower()
+    if clave in biblioteca:
+        biblioteca[clave]['copias'] += copias
+    else:
+        biblioteca[clave] = {
+            'titulo': titulo, 'autor': autor,
+            'anio': anio, 'copias': copias, 'prestados': 0
+        }
+    print(f"✅ '{titulo}' agregado")
+
+def prestar_libro(titulo):
+    clave = titulo.lower()
+    if clave not in biblioteca:
+        return f"❌ '{titulo}' no existe"
+    libro = biblioteca[clave]
+    if libro['copias'] - libro['prestados'] > 0:
+        libro['prestados'] += 1
+        return f"✅ '{titulo}' prestado"
+    return f"⚠️  Sin copias disponibles"
+
+def catalogo():
+    print(f"\n{'='*55}")
+    print(f"{'CATÁLOGO':^55}")
+    print(f"{'='*55}")
+    for libro in sorted(biblioteca.values(), key=lambda x: x['titulo']):
+        disp = libro['copias'] - libro['prestados']
+        print(f"  {libro['titulo']:<30} Disp: {disp}/{libro['copias']}")
+
+agregar_libro("El Principito", "Saint-Exupéry", 1943, 3)
+agregar_libro("Python Crash Course", "Eric Matthes", 2023, 2)
+agregar_libro("Clean Code", "Robert C. Martin", 2008, 1)
+
+print(prestar_libro("Clean Code"))
+print(prestar_libro("Clean Code"))
+
+catalogo()
+```
+
+---
+
+## 🏆 Desafíos
+
+::: {.callout-warning title="Desafío 1"}
+Implementa una función `memoize(func)` que actúe como decorador y guarde en caché los resultados previos. Pruébala con Fibonacci.
+:::
+
+::: {.callout-warning title="Desafío 2"}
+Crea `pipeline(*funciones)` que aplique funciones en secuencia. Ejemplo: `pipeline(str.strip, str.lower, str.title)("  HOLA MUNDO  ")`.
+:::
+
+---
+
+## 📝 Autoevaluación
+
+| Pregunta | Tu Respuesta |
+|---|---|
+| ¿Para qué sirve `*args`? | |
+| ¿Diferencia entre parámetro y argumento? | |
+| ¿Cómo retornas múltiples valores? | |
+| ¿Qué es un docstring? | |
+| ¿Cómo defines un lambda que cube un número? | |

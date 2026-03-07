@@ -1,0 +1,200 @@
+---
+title: "Diccionarios"
+subtitle: "Python Crash Course — Capítulo 6"
+author: "Basado en Eric Matthes"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    highlight-style: github
+    theme: cosmo
+  pdf:
+    toc: true
+jupyter: python3
+---
+
+> **Nivel:** Programadores con experiencia en otro lenguaje  
+> **Capítulo:** 6 — Pares clave-valor y estructuras anidadas
+
+
+## 🎯 Objetivos
+- Crear y acceder a diccionarios
+- Modificar y eliminar pares clave-valor
+- Recorrer diccionarios con loops
+- Anidar diccionarios y listas
+
+::: {.callout-tip title="Para quien ya programa"}
+Los diccionarios de Python son equivalentes a `HashMap` en Java, objetos literales en JavaScript, o `std::map` en C++. Son colecciones de pares clave-valor con búsqueda promedio O(1) gracias al hashing.
+:::
+
+## 6.1 Crear y Acceder
+
+```{python}
+persona = {
+    'nombre': 'Ana García',
+    'edad': 28,
+    'ciudad': 'Madrid',
+    'activo': True
+}
+
+print(persona['nombre'])
+print(persona['edad'])
+
+# .get() — acceso seguro (no lanza KeyError)
+print(persona.get('email'))              # None
+print(persona.get('email', 'No tiene'))  # Valor por defecto
+```
+
+```{python}
+inventario = {'manzanas': 50, 'naranjas': 30, 'peras': 45}
+
+print("Claves:", list(inventario.keys()))
+print("Valores:", list(inventario.values()))
+print("Pares:", list(inventario.items()))
+```
+
+## 6.2 Modificar Diccionarios
+
+```{python}
+config = {'modo': 'oscuro', 'idioma': 'español', 'volumen': 70}
+
+config['notificaciones'] = True    # Agregar
+config['volumen'] = 85             # Modificar
+del config['notificaciones']       # Eliminar
+
+modo = config.pop('modo')          # Eliminar y retornar
+print(f"Modo: {modo}")
+print(f"Config: {config}")
+```
+
+## 6.3 Recorrer Diccionarios
+
+```{python}
+capitales = {
+    'México': 'Ciudad de México',
+    'España': 'Madrid',
+    'Argentina': 'Buenos Aires',
+    'Colombia': 'Bogotá',
+}
+
+for pais, capital in capitales.items():
+    print(f"  {pais}: {capital}")
+```
+
+## 6.4 Estructuras Anidadas
+
+```{python}
+# Diccionario de diccionarios
+usuarios = {
+    'ana_g': {
+        'nombre': 'Ana García',
+        'lenguajes': ['Python', 'JavaScript'],
+        'nivel': 'senior'
+    },
+    'carlos_m': {
+        'nombre': 'Carlos Martínez',
+        'lenguajes': ['Java', 'C++'],
+        'nivel': 'principal'
+    }
+}
+
+for username, info in usuarios.items():
+    lengs = ', '.join(info['lenguajes'])
+    print(f"@{username} — {info['nombre']} ({info['nivel']}) — {lengs}")
+```
+
+---
+
+## ✏️ Ejercicios Prácticos
+
+### Ejercicio 6.1: Contador de Palabras
+
+```{python}
+texto = "python es un lenguaje poderoso python es versatil aprender python vale la pena"
+
+frecuencia = {}
+for palabra in texto.split():
+    frecuencia[palabra] = frecuencia.get(palabra, 0) + 1
+
+print("=== FRECUENCIA DE PALABRAS ===")
+for palabra, count in sorted(frecuencia.items(), key=lambda x: x[1], reverse=True):
+    barra = "█" * count
+    print(f"  {palabra:<15} {count:3d}  {barra}")
+```
+
+### Ejercicio 6.2: Agenda de Contactos
+
+```{python}
+agenda = {}
+
+def agregar_contacto(nombre, telefono, email=""):
+    agenda[nombre.lower()] = {
+        'nombre': nombre, 'telefono': telefono, 'email': email
+    }
+    print(f"✅ '{nombre}' agregado")
+
+def buscar_contacto(nombre):
+    contacto = agenda.get(nombre.lower())
+    if contacto:
+        print(f"📋 {contacto['nombre']} — {contacto['telefono']}")
+    else:
+        print(f"❌ No se encontró '{nombre}'")
+
+agregar_contacto("Ana García", "+52 555 1234", "ana@email.com")
+agregar_contacto("Carlos Ruiz", "+52 333 5678")
+buscar_contacto("Ana García")
+buscar_contacto("Pedro")
+```
+
+---
+
+## 🚀 Mini Proyecto: Traductor a Código Morse
+
+```{python}
+MORSE = {
+    'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.',
+    'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---',
+    'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---',
+    'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-',
+    'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--',
+    'Z': '--..', ' ': '/'
+}
+MORSE_INV = {v: k for k, v in MORSE.items()}
+
+def codificar(texto):
+    return ' '.join(MORSE.get(c.upper(), '?') for c in texto)
+
+def decodificar(morse):
+    partes = [MORSE_INV.get(s, '?') for s in morse.split()]
+    return ''.join(partes).replace('/', ' ')
+
+mensajes = ["HOLA", "SOS", "PYTHON"]
+for msg in mensajes:
+    cod = codificar(msg)
+    dec = decodificar(cod)
+    print(f"'{msg}' → '{cod}' → '{dec}'")
+```
+
+---
+
+## 🏆 Desafíos
+
+::: {.callout-warning title="Desafío 1"}
+Histograma de frecuencia de letras en un texto con visualización usando `█`.
+:::
+
+::: {.callout-warning title="Desafío 2"}
+Implementa un caché de Fibonacci con diccionario para evitar recálculos.
+:::
+
+---
+
+## 📝 Autoevaluación
+
+| Pregunta | Tu Respuesta |
+|---|---|
+| ¿Diferencia entre `dict['key']` y `dict.get('key')`? | |
+| ¿Cómo recorres claves y valores simultáneamente? | |
+| ¿Cómo eliminas una clave? (2 formas) | |
+| ¿Qué hace `{v: k for k, v in d.items()}`? | |

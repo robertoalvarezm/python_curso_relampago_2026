@@ -1,0 +1,198 @@
+---
+title: "Trabajando con Listas"
+subtitle: "Python Crash Course — Capítulo 4"
+author: "Basado en Eric Matthes"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    highlight-style: github
+    theme: cosmo
+  pdf:
+    toc: true
+jupyter: python3
+---
+
+> **Nivel:** Programadores con experiencia en otro lenguaje  
+> **Capítulo:** 4 — Loops, Range, Comprehensions y Tuplas
+
+
+## 🎯 Objetivos
+- Recorrer listas con `for` loops
+- Usar `range()` para secuencias numéricas
+- Crear listas con **list comprehensions**
+- Trabajar con tuplas inmutables
+
+::: {.callout-tip title="Para quien ya programa"}
+El `for` de Python itera sobre elementos (como `for-each` de Java). Las **list comprehensions** son una característica muy expresiva sin equivalente directo en muchos lenguajes — son `map + filter` en una sola línea legible.
+:::
+
+## 4.1 For Loops
+
+```{python}
+lenguajes = ['Python', 'Java', 'C++', 'Go', 'Rust']
+
+for lenguaje in lenguajes:
+    print(f"  → {lenguaje}")
+```
+
+```{python}
+# enumerate() — índice + valor simultáneamente
+frutas = ['manzana', 'banana', 'cereza']
+
+for pos, fruta in enumerate(frutas, 1):  # Empieza en 1
+    print(f"#{pos}: {fruta}")
+```
+
+## 4.2 range()
+
+```{python}
+print("range(5):", list(range(5)))
+print("range(1,6):", list(range(1, 6)))
+print("Pares:", list(range(0, 10, 2)))
+print("Regresiva:", list(range(10, 0, -1)))
+
+# Suma de 1 a 100
+total = sum(range(1, 101))
+print(f"\nSuma 1..100 = {total}")
+```
+
+## 4.3 List Comprehensions ⭐
+
+```{python}
+# Sin comprehension (verbose)
+cuadrados_clasico = []
+for x in range(1, 6):
+    cuadrados_clasico.append(x ** 2)
+
+# Con comprehension (Pythónico)
+cuadrados = [x ** 2 for x in range(1, 6)]
+
+print("Clásico:", cuadrados_clasico)
+print("Comp:   ", cuadrados)
+```
+
+```{python}
+# Con filtro — equivale a map + filter
+numeros = range(1, 21)
+pares_al_cuadrado = [n**2 for n in numeros if n % 2 == 0]
+print("Pares al cuadrado:", pares_al_cuadrado)
+
+# Transformación de strings
+palabras = ['python', 'java', 'javascript', 'go']
+largas_upper = [p.upper() for p in palabras if len(p) > 3]
+print("Largas en mayús:", largas_upper)
+```
+
+```{python}
+# Tabla pitagórica con comprehension anidado
+tabla = [[i * j for j in range(1, 6)] for i in range(1, 6)]
+
+print("Tabla 5x5:")
+for fila in tabla:
+    print(fila)
+```
+
+## 4.4 Tuplas — Inmutables
+
+```{python}
+# Las tuplas son inmutables — no se pueden modificar
+coordenadas = (10.5, -20.3)
+colores_rgb = (255, 128, 0)
+
+# Desempaquetado
+x, y = coordenadas
+r, g, b = colores_rgb
+print(f"Coordenadas: x={x}, y={y}")
+print(f"Color RGB: R={r}, G={g}, B={b}")
+
+# Swap elegante de variables (usa tuplas internamente)
+a, b = 10, 20
+a, b = b, a
+print(f"Después del swap: a={a}, b={b}")
+```
+
+---
+
+## ✏️ Ejercicios Prácticos
+
+### Ejercicio 4.1: Análisis de Temperaturas
+
+```{python}
+temps_celsius = [0, 10, 20, 25, 30, 35, 37, 38.5, 40]
+
+# 1. Convertir a Fahrenheit
+temps_f = [round((c * 9/5) + 32, 1) for c in temps_celsius]
+
+# 2. Temperaturas de fiebre
+fiebre = [c for c in temps_celsius if c > 37.5]
+
+# 3. Pares (celsius, fahrenheit)
+pares = list(zip(temps_celsius, temps_f))
+
+print("Celsius → Fahrenheit:")
+for c, f in pares:
+    estado = " 🌡️ FIEBRE" if c > 37.5 else ""
+    print(f"  {c}°C = {f}°F{estado}")
+
+print(f"\nTemps de fiebre: {fiebre}")
+```
+
+### Ejercicio 4.2: Tabla de Multiplicar Visual
+
+```{python}
+numero = 7
+print(f"=== TABLA DEL {numero} ===")
+for i in range(1, 11):
+    resultado = numero * i
+    barra = "█" * (resultado // 5)
+    print(f"{numero} × {i:2d} = {resultado:3d}  {barra}")
+```
+
+---
+
+## 🚀 Mini Proyecto: Análisis de Calificaciones
+
+```{python}
+calificaciones = {
+    'Ana': [85, 92, 78, 95, 88],
+    'Carlos': [70, 75, 80, 72, 78],
+    'Beatriz': [95, 98, 92, 96, 100],
+    'Diego': [60, 65, 58, 70, 62],
+}
+
+print("=" * 55)
+print(f"{'REPORTE DE CALIFICACIONES':^55}")
+print("=" * 55)
+print(f"{'Estudiante':<12} {'Promedio':>9} {'Min':>6} {'Max':>6} {'Estado':>10}")
+print("-" * 55)
+
+for nombre, notas in calificaciones.items():
+    promedio = sum(notas) / len(notas)
+    estado = "✅ Aprobado" if promedio >= 70 else "❌ Reprobado"
+    print(f"{nombre:<12} {promedio:>9.1f} {min(notas):>6} {max(notas):>6} {estado:>10}")
+```
+
+---
+
+## 🏆 Desafíos
+
+::: {.callout-warning title="Desafío 1"}
+Usando solo list comprehensions y `range()`, genera los primeros 20 números primos.
+:::
+
+::: {.callout-warning title="Desafío 2"}
+Crea una función que "aplane" una lista de listas usando list comprehension: `[[1,2],[3,4]]` → `[1,2,3,4]`.
+:::
+
+---
+
+## 📝 Autoevaluación
+
+| Pregunta | Tu Respuesta |
+|---|---|
+| ¿Diferencia entre lista y tupla? | |
+| ¿Para qué sirve `enumerate()`? | |
+| ¿Sintaxis básica de list comprehension? | |
+| ¿Cómo generas números del 0 al 100 de 5 en 5? | |
