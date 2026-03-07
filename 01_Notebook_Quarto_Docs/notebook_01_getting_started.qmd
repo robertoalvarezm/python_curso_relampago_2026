@@ -14,14 +14,14 @@ format:
 jupyter: python3
 ---
 
-> **Nivel:** Programadores con experiencia en otro lenguaje  
+> **Nivel:** Programadores con experiencia en otro lenguaje\
 > **Capítulo:** 1 — Primeros pasos
 
-
 ## 🎯 Objetivos
-- Ejecutar tu primer programa Python
-- Usar el intérprete interactivo
-- Entender comentarios y operaciones básicas
+
+-   Ejecutar tu primer programa Python
+-   Usar el intérprete interactivo
+-   Entender comentarios y operaciones básicas
 
 ::: {.callout-tip title="Para quien ya programa"}
 Python se distingue por su sintaxis limpia: no hay llaves `{}`, no hay puntos y coma obligatorios, y la indentación es parte de la gramática.
@@ -63,7 +63,7 @@ aunque oficialmente es solo un literal de string.
 print("Los comentarios hacen el codigo mas legible")
 ```
 
----
+------------------------------------------------------------------------
 
 ## ✏️ Ejercicios Prácticos
 
@@ -77,7 +77,7 @@ print("Y ahora aprendo Python")
 ```
 
 ::: {.callout-note title="✅ Solución"}
-```python
+``` python
 print("Hola, me llamo Ana García")
 print("Vengo de Java y JavaScript")
 print("Y ahora aprendo Python — ¡es mucho más conciso!")
@@ -99,7 +99,7 @@ print(f"Área: {area:.2f}")
 print(f"Perímetro: {perimetro:.2f}")
 ```
 
----
+------------------------------------------------------------------------
 
 ## 🚀 Mini Proyecto: Tarjeta de Presentación
 
@@ -113,7 +113,7 @@ print("Meta en Python:  [TU OBJETIVO]")
 print("=" * 40)
 ```
 
----
+------------------------------------------------------------------------
 
 ## 🏆 Desafíos
 
@@ -125,13 +125,13 @@ Calcula cuántos segundos hay en un año. Muestra el resultado con mensaje descr
 Calcula `2**1000` en Python y observa cómo maneja números enormes (comparado con otros lenguajes).
 :::
 
----
+------------------------------------------------------------------------
 
 ## 📝 Autoevaluación
 
-| Pregunta | Tu Respuesta |
-|---|---|
-| ¿Qué función muestra texto en pantalla? | |
-| ¿Cómo escribes un comentario de una línea? | |
-| ¿Qué operador se usa para potencias? | |
-| ¿Diferencia entre `/` y `//`? | |
+| Pregunta                                   | Tu Respuesta |
+|--------------------------------------------|--------------|
+| ¿Qué función muestra texto en pantalla?    |              |
+| ¿Cómo escribes un comentario de una línea? |              |
+| ¿Qué operador se usa para potencias?       |              |
+| ¿Diferencia entre `/` y `//`?              |              |

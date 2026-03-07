@@ -49,7 +49,7 @@ print(type(x))   # str
 ## 2.2 Strings y sus Métodos
 
 ```{python}
-nombre = "  ana patricia  "
+nombre = "  roberto carlos  "
 
 # Métodos de transformación
 print(nombre.title())    # Cada palabra capitalizada
