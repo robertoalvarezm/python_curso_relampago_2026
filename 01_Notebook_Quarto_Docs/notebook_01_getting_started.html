@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐍 Notebook 1: Getting Started with Python</title>
+<style>
+  /* Reset & base */
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #1f2937;
+    background: #f9fafb;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Layout */
+  .page-wrapper {
+    display: flex;
+    min-height: 100vh;
+  }
+  .sidebar {
+    width: 260px;
+    min-width: 260px;
+    background: #1e293b;
+    color: #cbd5e1;
+    padding: 2rem 1.2rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  .sidebar h2 {
+    color: #f1f5f9;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #334155;
+  }
+  .sidebar .toc {
+    font-size: 0.85rem;
+  }
+  .sidebar .toc a {
+    color: #94a3b8;
+    text-decoration: none;
+    display: block;
+    padding: 0.2rem 0;
+    transition: color 0.15s;
+  }
+  .sidebar .toc a:hover { color: #e2e8f0; }
+  .sidebar .toc ul { list-style: none; padding-left: 0.8rem; margin: 0; }
+  .sidebar .toc > ul { padding-left: 0; }
+  .sidebar .toc li { margin: 0.15rem 0; }
+
+  /* Main content */
+  .main-content {
+    flex: 1;
+    max-width: 860px;
+    padding: 3rem 3.5rem;
+    background: #ffffff;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .page-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  .page-header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 0.4rem 0;
+    line-height: 1.2;
+  }
+  .page-header .subtitle {
+    font-size: 1rem;
+    color: #64748b;
+    margin: 0;
+  }
+  .meta-badge {
+    display: inline-block;
+    background: #dbeafe;
+    color: #1e40af;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    margin-top: 0.8rem;
+  }
+
+  /* Typography */
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 2.5rem 0 0.8rem 0;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 1.8rem 0 0.6rem 0;
+  }
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 1.2rem 0 0.4rem 0;
+  }
+  p { margin: 0.6rem 0 1rem 0; }
+  strong { color: #0f172a; }
+  hr {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 2.5rem 0;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.2rem 0 1.6rem 0;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  th {
+    background: #1e293b;
+    color: #f1f5f9;
+    padding: 0.7rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 0.03em;
+  }
+  td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #f8fafc; }
+  tr:hover td { background: #f1f5f9; }
+
+  /* Code */
+  code {
+    background: #f1f5f9;
+    color: #be185d;
+    padding: 0.15em 0.45em;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, monospace;
+    font-size: 0.88em;
+  }
+  .codehilite {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1.1rem 1.3rem;
+    margin: 1rem 0 1.4rem 0;
+    overflow-x: auto;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  .codehilite code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+  }
+  pre {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1rem 1.3rem;
+    overflow-x: auto;
+    font-size: 0.88rem;
+    margin: 1rem 0;
+  }
+  pre code { background: transparent; color: inherit; padding: 0; }
+
+  /* Blockquotes */
+  blockquote {
+    background: #f0f9ff;
+    border-left: 5px solid #0ea5e9;
+    margin: 1.2rem 0;
+    padding: 0.8rem 1.2rem;
+    border-radius: 0 8px 8px 0;
+    color: #0c4a6e;
+    font-size: 0.95rem;
+  }
+  blockquote p { margin: 0; }
+
+  /* Lists */
+  ul, ol { padding-left: 1.5rem; margin: 0.5rem 0 1rem 0; }
+  li { margin: 0.3rem 0; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main-content { padding: 1.5rem; }
+  }
+
+  /* Pygments */
+  pre { line-height: 125%; }
+td.linenos .normal { color: #666666; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #666666; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.codehilite .hll { background-color: #ffffcc }
+.codehilite { background: #f0f0f0; }
+.codehilite .c { color: #60A0B0; font-style: italic } /* Comment */
+.codehilite .err { border: 1px solid #F00 } /* Error */
+.codehilite .k { color: #007020; font-weight: bold } /* Keyword */
+.codehilite .o { color: #666 } /* Operator */
+.codehilite .ch { color: #60A0B0; font-style: italic } /* Comment.Hashbang */
+.codehilite .cm { color: #60A0B0; font-style: italic } /* Comment.Multiline */
+.codehilite .cp { color: #007020 } /* Comment.Preproc */
+.codehilite .cpf { color: #60A0B0; font-style: italic } /* Comment.PreprocFile */
+.codehilite .c1 { color: #60A0B0; font-style: italic } /* Comment.Single */
+.codehilite .cs { color: #60A0B0; background-color: #FFF0F0 } /* Comment.Special */
+.codehilite .gd { color: #A00000 } /* Generic.Deleted */
+.codehilite .ge { font-style: italic } /* Generic.Emph */
+.codehilite .ges { font-weight: bold; font-style: italic } /* Generic.EmphStrong */
+.codehilite .gr { color: #F00 } /* Generic.Error */
+.codehilite .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.codehilite .gi { color: #00A000 } /* Generic.Inserted */
+.codehilite .go { color: #888 } /* Generic.Output */
+.codehilite .gp { color: #C65D09; font-weight: bold } /* Generic.Prompt */
+.codehilite .gs { font-weight: bold } /* Generic.Strong */
+.codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.codehilite .gt { color: #04D } /* Generic.Traceback */
+.codehilite .kc { color: #007020; font-weight: bold } /* Keyword.Constant */
+.codehilite .kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
+.codehilite .kn { color: #007020; font-weight: bold } /* Keyword.Namespace */
+.codehilite .kp { color: #007020 } /* Keyword.Pseudo */
+.codehilite .kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
+.codehilite .kt { color: #902000 } /* Keyword.Type */
+.codehilite .m { color: #40A070 } /* Literal.Number */
+.codehilite .s { color: #4070A0 } /* Literal.String */
+.codehilite .na { color: #4070A0 } /* Name.Attribute */
+.codehilite .nb { color: #007020 } /* Name.Builtin */
+.codehilite .nc { color: #0E84B5; font-weight: bold } /* Name.Class */
+.codehilite .no { color: #60ADD5 } /* Name.Constant */
+.codehilite .nd { color: #555; font-weight: bold } /* Name.Decorator */
+.codehilite .ni { color: #D55537; font-weight: bold } /* Name.Entity */
+.codehilite .ne { color: #007020 } /* Name.Exception */
+.codehilite .nf { color: #06287E } /* Name.Function */
+.codehilite .nl { color: #002070; font-weight: bold } /* Name.Label */
+.codehilite .nn { color: #0E84B5; font-weight: bold } /* Name.Namespace */
+.codehilite .nt { color: #062873; font-weight: bold } /* Name.Tag */
+.codehilite .nv { color: #BB60D5 } /* Name.Variable */
+.codehilite .ow { color: #007020; font-weight: bold } /* Operator.Word */
+.codehilite .w { color: #BBB } /* Text.Whitespace */
+.codehilite .mb { color: #40A070 } /* Literal.Number.Bin */
+.codehilite .mf { color: #40A070 } /* Literal.Number.Float */
+.codehilite .mh { color: #40A070 } /* Literal.Number.Hex */
+.codehilite .mi { color: #40A070 } /* Literal.Number.Integer */
+.codehilite .mo { color: #40A070 } /* Literal.Number.Oct */
+.codehilite .sa { color: #4070A0 } /* Literal.String.Affix */
+.codehilite .sb { color: #4070A0 } /* Literal.String.Backtick */
+.codehilite .sc { color: #4070A0 } /* Literal.String.Char */
+.codehilite .dl { color: #4070A0 } /* Literal.String.Delimiter */
+.codehilite .sd { color: #4070A0; font-style: italic } /* Literal.String.Doc */
+.codehilite .s2 { color: #4070A0 } /* Literal.String.Double */
+.codehilite .se { color: #4070A0; font-weight: bold } /* Literal.String.Escape */
+.codehilite .sh { color: #4070A0 } /* Literal.String.Heredoc */
+.codehilite .si { color: #70A0D0; font-style: italic } /* Literal.String.Interpol */
+.codehilite .sx { color: #C65D09 } /* Literal.String.Other */
+.codehilite .sr { color: #235388 } /* Literal.String.Regex */
+.codehilite .s1 { color: #4070A0 } /* Literal.String.Single */
+.codehilite .ss { color: #517918 } /* Literal.String.Symbol */
+.codehilite .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.codehilite .fm { color: #06287E } /* Name.Function.Magic */
+.codehilite .vc { color: #BB60D5 } /* Name.Variable.Class */
+.codehilite .vg { color: #BB60D5 } /* Name.Variable.Global */
+.codehilite .vi { color: #BB60D5 } /* Name.Variable.Instance */
+.codehilite .vm { color: #BB60D5 } /* Name.Variable.Magic */
+.codehilite .il { color: #40A070 } /* Literal.Number.Integer.Long */
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <nav class="sidebar">
+    <h2>📋 Contenido</h2>
+    <div class="toc"><div class="toc">
+<ul>
+<li><a href="#objetivos-de-aprendizaje">🎯 Objetivos de Aprendizaje</a></li>
+<li><a href="#11-tu-primer-programa">1.1 Tu Primer Programa</a><ul>
+<li><a href="#r-vs-python-imprimir-en-pantalla">R vs Python — Imprimir en pantalla</a></li>
+</ul>
+</li>
+<li><a href="#12-python-como-calculadora">1.2 Python como Calculadora</a><ul>
+<li><a href="#r-vs-python-operadores-aritmeticos">R vs Python — Operadores aritméticos</a></li>
+</ul>
+</li>
+<li><a href="#13-comentarios-en-python">1.3 Comentarios en Python</a><ul>
+<li><a href="#r-vs-python-comentarios">R vs Python — Comentarios</a></li>
+</ul>
+</li>
+<li><a href="#ejercicios-practicos">✏️ Ejercicios Prácticos</a><ul>
+<li><a href="#ejercicio-11-mensaje-personalizado">Ejercicio 1.1 — Mensaje Personalizado</a></li>
+<li><a href="#ejercicio-12-calculadora-geometrica">Ejercicio 1.2 — Calculadora Geométrica</a></li>
+<li><a href="#ejercicio-13-conversion-de-temperatura">Ejercicio 1.3 — Conversión de Temperatura</a></li>
+<li><a href="#ejercicio-14-detecta-el-error">Ejercicio 1.4 — Detecta el Error</a></li>
+<li><a href="#ejercicio-15-tu-numero-favorito">Ejercicio 1.5 — Tu Número Favorito</a></li>
+</ul>
+</li>
+<li><a href="#mini-proyecto-tarjeta-de-presentacion">🚀 Mini Proyecto: Tarjeta de Presentación</a></li>
+<li><a href="#desafios-sin-solucion">🏆 Desafíos (sin solución)</a></li>
+<li><a href="#mini-quiz-de-autoevaluacion">📝 Mini-Quiz de Autoevaluación</a></li>
+</ul>
+</div>
+</div>
+  </nav>
+
+  <main class="main-content">
+    <header class="page-header">
+      <h1>🐍 Notebook 1: Getting Started with Python</h1>
+      <p class="subtitle">Python Crash Course — Capítulo 1 | Para programadores que vienen de R</p>
+      <span class="meta-badge">👥 Para programadores que vienen de R</span>
+    </header>
+
+    <blockquote>
+<p><strong>Nivel:</strong> Programadores con experiencia básica en R\
+<strong>Capítulo:</strong> 1 — Primeros pasos\
+<strong>Tiempo estimado:</strong> 45–60 minutos</p>
+</blockquote>
+<hr />
+<h2 id="objetivos-de-aprendizaje">🎯 Objetivos de Aprendizaje</h2>
+<p>Al terminar este notebook podrás:</p>
+<ul>
+<li>Ejecutar tu primer programa en Python</li>
+<li>Entender las diferencias clave de sintaxis entre R y Python</li>
+<li>Usar operaciones aritméticas y comentarios</li>
+<li>Construir tu primera "tarjeta de presentación" en código</li>
+</ul>
+<div class="callout callout-tip" style="background:#d1fae5;border-left:5px solid #059669;padding:1rem 1.4rem;margin:1.4rem 0;border-radius:0 8px 8px 0;"><p style="margin:0 0 0.4rem 0;font-weight:700;color:#065f46;">💡 Si vienes de R, esto te sonará familiar</p>
+
+Python y R son ambos lenguajes interpretados de alto nivel. La diferencia principal es que **Python no necesita `<-` para asignar** (usa `=`), **no necesita `library()` para lo básico**, y la **indentación no es opcional** — es parte de la gramática del lenguaje.
+
+</div>
+
+<hr />
+<h2 id="11-tu-primer-programa">1.1 Tu Primer Programa</h2>
+<p>En R probablemente escribiste <code>print("Hola")</code> o simplemente <code>"Hola"</code>. En Python, <code>print()</code> es siempre explícito.</p>
+<div class="codehilite"><pre><span></span><code># La función print() muestra texto en pantalla
+print(&quot;¡Hola, Python!&quot;)
+print(&quot;Bienvenido al mundo de la programación con Python&quot;)
+</code></pre></div>
+
+<h3 id="r-vs-python-imprimir-en-pantalla">R vs Python — Imprimir en pantalla</h3>
+<table>
+<thead>
+<tr>
+<th>Tarea</th>
+<th>En R</th>
+<th>En Python</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Imprimir texto</td>
+<td><code>print("Hola")</code> o solo <code>"Hola"</code> en consola</td>
+<td><code>print("Hola")</code></td>
+</tr>
+<tr>
+<td>Imprimir número</td>
+<td><code>print(42)</code></td>
+<td><code>print(42)</code></td>
+</tr>
+<tr>
+<td>Imprimir múltiples valores</td>
+<td><code>cat("a", "b", "\n")</code></td>
+<td><code>print("a", "b")</code></td>
+</tr>
+<tr>
+<td>Concatenar texto al imprimir</td>
+<td><code>paste("Hola", nombre)</code></td>
+<td><code>f"Hola {nombre}"</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-warning" style="background:#fef3c7;border-left:5px solid #d97706;padding:1rem 1.4rem;margin:1.4rem 0;border-radius:0 8px 8px 0;"><p style="margin:0 0 0.4rem 0;font-weight:700;color:#92400e;">⚠️ Error común: olvidar los paréntesis</p>
+
+En R puedes escribir `print "Hola"` en versiones antiguas, pero en Python **los paréntesis son obligatorios** siempre.
+
+
+<div class="codehilite"><pre><span></span><code><span class="c1"># ❌ Esto genera un SyntaxError en Python</span>
+<span class="nb">print</span> <span class="s2">&quot;Hola&quot;</span>
+
+<span class="c1"># ✅ Correcto</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hola&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+
+</div>
+
+<hr />
+<h2 id="12-python-como-calculadora">1.2 Python como Calculadora</h2>
+<p>Las operaciones aritméticas son casi idénticas a R, con una diferencia importante: el operador de potencia.</p>
+<div class="codehilite"><pre><span></span><code><span class="gh">#</span> Operaciones aritméticas básicas
+print(2 + 3)      # Suma
+print(10 <span class="gs">* 5)     # Multiplicación</span>
+<span class="gs">print(2 *</span>* 10)    # Potencia: 2^10 — en Python es ** no ^
+print(17 / 3)     # División (siempre retorna float)
+print(17 // 3)    # División entera (floor division)
+print(17 % 3)     # Módulo: el RESTO de la división
+</code></pre></div>
+
+<h3 id="r-vs-python-operadores-aritmeticos">R vs Python — Operadores aritméticos</h3>
+<table>
+<thead>
+<tr>
+<th>Operación</th>
+<th>En R</th>
+<th>En Python</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Suma</td>
+<td><code>5 + 3</code></td>
+<td><code>5 + 3</code></td>
+</tr>
+<tr>
+<td>Resta</td>
+<td><code>5 - 3</code></td>
+<td><code>5 - 3</code></td>
+</tr>
+<tr>
+<td>Multiplicación</td>
+<td><code>5 * 3</code></td>
+<td><code>5 * 3</code></td>
+</tr>
+<tr>
+<td>División</td>
+<td><code>5 / 3</code></td>
+<td><code>5 / 3</code></td>
+</tr>
+<tr>
+<td><strong>Potencia</strong></td>
+<td><code>5 ^ 3</code> o <code>5 ** 3</code></td>
+<td><code>5 ** 3</code> ← solo este</td>
+</tr>
+<tr>
+<td>División entera</td>
+<td><code>5 %/% 3</code></td>
+<td><code>5 // 3</code></td>
+</tr>
+<tr>
+<td>Módulo</td>
+<td><code>5 %% 3</code></td>
+<td><code>5 % 3</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-warning" style="background:#fef3c7;border-left:5px solid #d97706;padding:1rem 1.4rem;margin:1.4rem 0;border-radius:0 8px 8px 0;"><p style="margin:0 0 0.4rem 0;font-weight:700;color:#92400e;">⚠️ Error común: usar ^ para potencias</p>
+
+En R usabas `^` para potencias. En Python `^` existe pero hace algo completamente distinto (XOR a nivel de bits). **Siempre usa `**` para potencias en Python.**
+
+
+<div class="codehilite"><pre><span></span><code><span class="c1"># ❌ En Python ^ NO es potencia</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">^</span> <span class="mi">10</span><span class="p">)</span>   <span class="c1"># Imprime 8, no 1024 — resultado sorprendente</span>
+
+<span class="c1"># ✅ Correcto</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># Imprime 1024</span>
+</code></pre></div>
+
+
+
+</div>
+
+<div class="callout callout-note" style="background:#dbeafe;border-left:5px solid #2563eb;padding:1rem 1.4rem;margin:1.4rem 0;border-radius:0 8px 8px 0;"><p style="margin:0 0 0.4rem 0;font-weight:700;color:#1e3a8a;">🔍 ¿Qué hace la división entera `//`?</p>
+
+La división entera (`//`) descarta la parte decimal y siempre redondea **hacia abajo** (floor). Es equivalente al `%/%` de R.
+
+
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="mi">17</span> <span class="o">//</span> <span class="mi">3</span><span class="p">)</span>   <span class="c1"># 5  → porque 17 / 3 = 5.66... → se queda con 5</span>
+<span class="nb">print</span><span class="p">(</span><span class="o">-</span><span class="mi">17</span> <span class="o">//</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># -6 → porque -5.66... redondea hacia abajo a -6</span>
+</code></pre></div>
+
+
+
+</div>
+
+<hr />
+<h2 id="13-comentarios-en-python">1.3 Comentarios en Python</h2>
+<div class="codehilite"><pre><span></span><code><span class="gh">#</span> Esto es un comentario de una línea — igual que en R
+
+<span class="gh">#</span> En Python NO existe /* */ como en C
+<span class="gh">#</span> Se usan múltiples # o strings con triple comilla
+
+&quot;&quot;&quot;
+Este string multilínea se usa a veces como comentario de bloque.
+Técnicamente es un literal de string, no un comentario oficial,
+pero es la convención más usada en la comunidad Python.
+&quot;&quot;&quot;
+
+print(&quot;Los comentarios hacen el código más legible&quot;)
+</code></pre></div>
+
+<h3 id="r-vs-python-comentarios">R vs Python — Comentarios</h3>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>En R</th>
+<th>En Python</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Una línea</td>
+<td><code># comentario</code></td>
+<td><code># comentario</code></td>
+</tr>
+<tr>
+<td>Bloque / multilínea</td>
+<td>No existe nativo, repetir <code>#</code></td>
+<td><code>"""texto"""</code> o repetir <code>#</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-tip" style="background:#d1fae5;border-left:5px solid #059669;padding:1rem 1.4rem;margin:1.4rem 0;border-radius:0 8px 8px 0;"><p style="margin:0 0 0.4rem 0;font-weight:700;color:#065f46;">💡 Buena práctica</p>
+
+Comenta el **por qué**, no el **qué**. El código explica qué hace; el comentario explica por qué lo hace.
+
+
+<div class="codehilite"><pre><span></span><code><span class="c1"># ❌ Comentario inútil (solo repite el código)</span>
+<span class="n">radio</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># asigna 5 a radio</span>
+
+<span class="c1"># ✅ Comentario útil</span>
+<span class="n">radio</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># radio en metros según especificación del cliente</span>
+</code></pre></div>
+
+
+
+</div>
+
+<hr />
+<h2 id="ejercicios-practicos">✏️ Ejercicios Prácticos</h2>
+<h3 id="ejercicio-11-mensaje-personalizado">Ejercicio 1.1 — Mensaje Personalizado</h3>
+<p>Modifica el código para que incluya <strong>tu nombre</strong> y el <strong>lenguaje con el que ya programas</strong>.</p>
+<div class="codehilite"><pre><span></span><code><span class="cp"># Tu turno — modifica las cadenas de texto</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&quot;Hola, me llamo [TU NOMBRE]&quot;</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&quot;Vengo del lenguaje [TU LENGUAJE]&quot;</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&quot;Y ahora aprendo Python&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="callout callout-note" style="background:#dbeafe;border-left:5px solid #2563eb;padding:1rem 1.4rem;margin:1.4rem 0;border-radius:0 8px 8px 0;"><p style="margin:0 0 0.4rem 0;font-weight:700;color:#1e3a8a;">✅ Solución de referencia</p>
+
+
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hola, me llamo Ana García&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vengo de R&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Y ahora aprendo Python — ¡la sintaxis es muy parecida!&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+
+</div>
+
+<hr />
+<h3 id="ejercicio-12-calculadora-geometrica">Ejercicio 1.2 — Calculadora Geométrica</h3>
+<p>Calcula el área y perímetro de un círculo con radio 7. Usa <code>3.14159</code> para π.</p>
+<div class="codehilite"><pre><span></span><code><span class="gh">#</span> Completa el código
+radio = 7
+pi = 3.14159
+
+<span class="gh">#</span> Escribe aquí tus fórmulas:
+area = ___
+perimetro = ___
+
+print(f&quot;Radio: {radio}&quot;)
+print(f&quot;Área: {area:.2f}&quot;)
+print(f&quot;Perímetro: {perimetro:.2f}&quot;)
+</code></pre></div>
+
+<div class="callout callout-note" style="background:#dbeafe;border-left:5px solid #2563eb;padding:1rem 1.4rem;margin:1.4rem 0;border-radius:0 8px 8px 0;"><p style="margin:0 0 0.4rem 0;font-weight:700;color:#1e3a8a;">✅ Solución</p>
+
+
+<div class="codehilite"><pre><span></span><code><span class="n">radio</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">pi</span> <span class="o">=</span> <span class="mf">3.14159</span>
+<span class="n">area</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">radio</span> <span class="o">**</span> <span class="mi">2</span>       <span class="c1"># pi * r^2</span>
+<span class="n">perimetro</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="n">radio</span>   <span class="c1"># 2 * pi * r</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Área: </span><span class="si">{</span><span class="n">area</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Perímetro: </span><span class="si">{</span><span class="n">perimetro</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+
+</div>
+
+<hr />
+<h3 id="ejercicio-13-conversion-de-temperatura">Ejercicio 1.3 — Conversión de Temperatura</h3>
+<p>En R usarías <code>(fahrenheit - 32) * 5/9</code>. Traduce esa fórmula a Python.</p>
+<div class="codehilite"><pre><span></span><code><span class="gh">#</span> Convierte 98.6°F (temperatura corporal) a Celsius
+fahrenheit = 98.6
+
+<span class="gh">#</span> Escribe la fórmula: (F - 32) * 5/9
+celsius = ___
+
+print(f&quot;{fahrenheit}°F son {celsius:.1f}°C&quot;)
+</code></pre></div>
+
+<div class="callout callout-note" style="background:#dbeafe;border-left:5px solid #2563eb;padding:1rem 1.4rem;margin:1.4rem 0;border-radius:0 8px 8px 0;"><p style="margin:0 0 0.4rem 0;font-weight:700;color:#1e3a8a;">✅ Solución</p>
+
+
+<div class="codehilite"><pre><span></span><code><span class="n">fahrenheit</span> <span class="o">=</span> <span class="mf">98.6</span>
+<span class="n">celsius</span> <span class="o">=</span> <span class="p">(</span><span class="n">fahrenheit</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">9</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">fahrenheit</span><span class="si">}</span><span class="s2">°F son </span><span class="si">{</span><span class="n">celsius</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+<span class="c1"># Output: 98.6°F son 37.0°C</span>
+</code></pre></div>
+
+
+
+</div>
+
+<hr />
+<h3 id="ejercicio-14-detecta-el-error">Ejercicio 1.4 — Detecta el Error</h3>
+<p>El siguiente bloque tiene <strong>3 errores</strong>. Encuéntralos y corrígelos.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># ⚠️ Este código tiene errores — encuéntrarlos</span>
+<span class="n">Print</span><span class="p">(</span><span class="s2">&quot;Bienvenido a Python&quot;</span><span class="p">)</span>
+<span class="n">resultado</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">^</span> <span class="mi">8</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2 elevado a 8 es: &quot;</span> <span class="o">+</span> <span class="n">resultado</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="callout callout-note" style="background:#dbeafe;border-left:5px solid #2563eb;padding:1rem 1.4rem;margin:1.4rem 0;border-radius:0 8px 8px 0;"><p style="margin:0 0 0.4rem 0;font-weight:700;color:#1e3a8a;">✅ Solución y explicación</p>
+
+**Error 1:** `Print` con P mayúscula → Python distingue mayúsculas/minúsculas. La función es `print`.
+
+**Error 2:** `2 ^ 8` → En Python `^` es XOR, no potencia. Debe ser `2 ** 8`.
+
+**Error 3:** `"texto" + resultado` → No puedes concatenar un string con un número directamente. Usa f-string: `f"2 elevado a 8 es: {resultado}"`.
+
+
+<div class="codehilite"><pre><span></span><code><span class="c1"># ✅ Versión corregida</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bienvenido a Python&quot;</span><span class="p">)</span>
+<span class="n">resultado</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">8</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;2 elevado a 8 es: </span><span class="si">{</span><span class="n">resultado</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+
+
+</div>
+
+<hr />
+<h3 id="ejercicio-15-tu-numero-favorito">Ejercicio 1.5 — Tu Número Favorito</h3>
+<p>Elige un número. Genera ese mismo número usando <strong>5 operaciones aritméticas diferentes</strong>.</p>
+<div class="codehilite"><pre><span></span><code><span class="gh">#</span> Ejemplo: el número 42
+<span class="gh">#</span> 42 = 40 + 2
+print(40 + 2)
+<span class="gh">#</span> 42 = 6 * 7
+print(6 * 7)
+
+<span class="gh">#</span> Tu turno: elige tu número favorito y genera 5 formas de obtenerlo
+numero_favorito = ___
+
+print(___)  # con suma
+print(___)  # con resta
+print(___)  # con multiplicación
+print(___)  # con potencia
+print(___)  # con módulo o división
+</code></pre></div>
+
+<hr />
+<h2 id="mini-proyecto-tarjeta-de-presentacion">🚀 Mini Proyecto: Tarjeta de Presentación</h2>
+<p>Crea una tarjeta de presentación usando <code>print()</code>. Debe incluir nombre, lenguaje previo, y un dato curioso.</p>
+<div class="codehilite"><pre><span></span><code><span class="cp"># Modifica los valores entre corchetes</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&quot;=&quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">42</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&quot;        TARJETA DE PRESENTACIÓN&quot;</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&quot;=&quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">42</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&quot;Nombre:          [TU NOMBRE]&quot;</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&quot;Lenguaje previo: R&quot;</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&quot;Dato curioso:    [ALGO INTERESANTE]&quot;</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&quot;Meta en Python:  [QUÉ QUIERES HACER]&quot;</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="s">&quot;=&quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">42</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="callout callout-tip" style="background:#d1fae5;border-left:5px solid #059669;padding:1rem 1.4rem;margin:1.4rem 0;border-radius:0 8px 8px 0;"><p style="margin:0 0 0.4rem 0;font-weight:700;color:#065f46;">💡 Truco: `*` con strings</p>
+
+En Python puedes multiplicar un string por un número: `"=" * 42` repite el carácter 42 veces. En R el equivalente sería `strrep("=", 42)`.
+
+</div>
+
+<hr />
+<h2 id="desafios-sin-solucion">🏆 Desafíos (sin solución)</h2>
+<div class="callout callout-caution" style="background:#fce7f3;border-left:5px solid #db2777;padding:1rem 1.4rem;margin:1.4rem 0;border-radius:0 8px 8px 0;"><p style="margin:0 0 0.4rem 0;font-weight:700;color:#831843;">Desafío 1 — Segundos en un año</p>
+
+Calcula cuántos segundos hay en un año (no bisiesto). Muestra el resultado con un mensaje descriptivo que incluya el número formateado con separadores de miles.
+
+*Pista: en Python `f"{numero:,}"` formatea con comas como separador de miles.*
+
+</div>
+
+<div class="callout callout-caution" style="background:#fce7f3;border-left:5px solid #db2777;padding:1rem 1.4rem;margin:1.4rem 0;border-radius:0 8px 8px 0;"><p style="margin:0 0 0.4rem 0;font-weight:700;color:#831843;">Desafío 2 — Números enormes</p>
+
+Calcula `2 ** 1000`. En R esto daría `Inf` con enteros. ¿Qué pasa en Python? ¿Por qué? Escribe un comentario explicando la diferencia.
+
+</div>
+
+<div class="callout callout-caution" style="background:#fce7f3;border-left:5px solid #db2777;padding:1rem 1.4rem;margin:1.4rem 0;border-radius:0 8px 8px 0;"><p style="margin:0 0 0.4rem 0;font-weight:700;color:#831843;">Desafío 3 — Índice de Masa Corporal</p>
+
+Dado un peso en kg y una altura en metros, calcula el IMC (`peso / altura²`). Clasifica el resultado imprimiendo si es "Bajo peso", "Normal", "Sobrepeso" o "Obesidad" usando el operador `print()` (sin usar `if` todavía — puedes hardcodearlo para el valor calculado).
+
+</div>
+
+<hr />
+<h2 id="mini-quiz-de-autoevaluacion">📝 Mini-Quiz de Autoevaluación</h2>
+<p>Responde en la celda de Markdown debajo (doble clic para editar):</p>
+<p><strong>1.</strong> ¿Cuál es la función para mostrar texto en Python y en qué se diferencia de R?</p>
+<p>→ <em>Tu respuesta aquí</em></p>
+<p><strong>2.</strong> En R usas <code>^</code> para potencias. ¿Qué operador usas en Python y por qué no puedes usar <code>^</code>?</p>
+<p>→ <em>Tu respuesta aquí</em></p>
+<p><strong>3.</strong> ¿Qué diferencia hay entre <code>/</code> y <code>//</code> en Python? ¿Cuál es el equivalente de <code>//</code> en R?</p>
+<p>→ <em>Tu respuesta aquí</em></p>
+<p><strong>4.</strong> ¿Qué hace <code>"#" * 20</code> en Python? ¿Cómo lo harías en R?</p>
+<p>→ <em>Tu respuesta aquí</em></p>
+<p><strong>5.</strong> Encuentra el error: <code>print("El resultado es: " + 2 ** 8)</code></p>
+<p>→ <em>Tu respuesta aquí</em></p>
+<div class="callout callout-note" style="background:#dbeafe;border-left:5px solid #2563eb;padding:1rem 1.4rem;margin:1.4rem 0;border-radius:0 8px 8px 0;"><p style="margin:0 0 0.4rem 0;font-weight:700;color:#1e3a8a;">✅ Respuestas del Quiz</p>
+
+1. `print()` — igual en ambos, pero en Python los paréntesis son **siempre** obligatorios; en R antigua versión podían omitirse.
+2. `**` para potencias. El `^` en Python es el operador XOR (operación a nivel de bits), no potencia.
+3. `/` siempre devuelve float (`17/3 = 5.666...`). `//` es división entera y descarta decimales (`17//3 = 5`). El equivalente en R es `%/%`.
+4. Imprime `####################` (20 signos `#`). En R: `strrep("#", 20)`.
+5. Error de tipo: no se puede concatenar string con entero. Solución: `print(f"El resultado es: {2 ** 8}")`.
+
+</div>
+
+<hr />
+<p><em>Notebook siguiente → Variables y Tipos de Datos</em></p>
+  </main>
+
+</div>
+</body>
+</html>
