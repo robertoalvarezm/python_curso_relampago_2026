@@ -1,0 +1,500 @@
+---
+title: "🐍 Historia del Lenguaje de Programación Python"
+subtitle: "Del absurdo al poder: de los cantos vikingos, pasando por la carne enlatada, los sketches británicos a la inteligencia artificial"
+author: "Roberto Álvarez"
+date: today
+lang: es
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    toc-title: "Contenido"
+    number-sections: true
+    code-fold: true
+    code-summary: "Ver código"
+    smooth-scroll: true
+    highlight-style: github
+    css: styles.css
+    include-in-header:
+      text: |
+        <style>
+          body { font-family: 'Segoe UI', sans-serif; }
+          h1, h2, h3 { color: #306998; }
+          .callout-note { border-left: 4px solid #306998; }
+          .callout-tip { border-left: 4px solid #FFD43B; }
+          .callout-warning { border-left: 4px solid #FF6B35; }
+          .hero-banner {
+            background: linear-gradient(135deg, #306998 0%, #FFD43B 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+          }
+          .timeline-item {
+            border-left: 3px solid #306998;
+            padding-left: 20px;
+            margin-bottom: 20px;
+          }
+          .year-badge {
+            background: #FFD43B;
+            color: #333;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85em;
+          }
+          .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+          }
+          .video-container iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: 0;
+          }
+          .sketch-card {
+            border: 2px solid #306998;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            background: #f8f9fa;
+          }
+          .guido-quote {
+            background: #e8f4f8;
+            border-left: 5px solid #306998;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            margin: 20px 0;
+          }
+          .spam-box {
+            background: #fff3cd;
+            border: 2px dashed #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+          }
+        </style>
+#bibliography: references.bib
+---
+
+::: {.hero-banner}
+# 🐍 Historia de Python
+### Del Circo Volador Monty Python a la Revolución de la IA
+*Un viaje desde los navíos vikingos cantando "SPAM" hasta los modelos de lenguaje más avanzados del mundo*
+:::
+
+---
+
+# Introducción
+
+Python es hoy uno de los lenguajes de programación más utilizados en el mundo. Impulsa la inteligencia artificial, el análisis de datos, el desarrollo web y la automatización. Pero pocos saben que sus raíces no están únicamente en la informática, sino también en el absurdismo británico de los años 70.
+
+Este documento recorre la historia completa de Python: desde su peculiar origen con nombre de comedia hasta convertirse en el motor de la tecnología moderna, pasando por su creador, Guido van Rossum, y los momentos históricos que definieron su evolución.
+
+::: {.callout-tip}
+## ¿Sabías que...?
+El nombre "Python" **no tiene nada que ver con serpientes**. Guido van Rossum eligió el nombre en honor al grupo cómico británico **Monty Python's Flying Circus**, cuyas absurdas rutinas de comedia eran su entretenimiento favorito mientras desarrollaba el lenguaje.
+:::
+
+---
+
+# Los Orígenes: Monty Python's Flying Circus 🎪
+
+## El Grupo que Inspiró un Lenguaje
+
+Antes de entender Python el lenguaje, debemos conocer a **Monty Python**, el grupo de comedia que le dio nombre.
+
+Monty Python's Flying Circus fue un colectivo humorístico británico formado en 1969, integrado por:
+
+- **Graham Chapman**
+- **John Cleese**
+- **Terry Gilliam**
+- **Eric Idle**
+- **Terry Jones**
+- **Michael Palin**
+
+Su programa televisivo de la BBC —*Monty Python's Flying Circus*— revolucionó la comedia con su humor absurdo, surrealista y completamente impredecible. Rompieron todas las convenciones del sketch cómico de la época.
+
+## Los Sketches Clásicos que Debes Conocer
+
+### 🦜 El Loro Muerto (*Dead Parrot*)
+
+Uno de los sketches más célebres de la historia de la comedia. Un cliente regresa a una tienda de mascotas con un loro noruego azul que claramente está **muerto**, mientras el dependiente insiste de manera absurda en que el loro simplemente "está descansando".
+
+<div class="sketch-card">
+**¿Por qué es relevante para Python?** Este sketch captura perfectamente el espíritu que Guido quería para su lenguaje: claridad, honestidad y que las cosas sean exactamente lo que parecen. Un loro muerto es un loro muerto, no "está descansando".
+</div>
+
+::: {.video-container}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/TaFDzTzKAT0?si=B-Z3jEzfJafUnAFw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+:::
+
+---
+
+### 🏃 El Ministerio de los Andares Ridículos (*Ministry of Silly Walks*)
+
+Un funcionario del gobierno británico trabaja en el **Ministerio de los Andares Ridículos**, evaluando y financiando nuevas formas absurdas de caminar. John Cleese protagoniza este sketch con una actuación física legendaria.
+
+::: {.video-container}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5ptUMe9eqYE?si=BGpL9JOlJk3aEmBb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+:::
+
+---
+
+### 🗡️ El Caballero Negro (*The Black Knight*)
+
+Del filme *Monty Python and the Holy Grail* (1975). Un caballero negro bloquea el paso a un puente y se niega a rendirse incluso cuando pierde sucesivamente todos sus miembros en combate, declarando cada amputación "un rasguño".
+
+::: {.video-container}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kRwCPUEND1U?si=9WChJ_If4y6MaKi5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+:::
+
+---
+
+### 🪓 La Inquisición Española (*The Spanish Inquisition*)
+
+El sketch más famoso del grupo. Basado en el elemento sorpresa absoluto: nadie espera a la Inquisición Española. Cada vez que alguien dice "no esperaba eso", el Cardenal Ximénez y sus secuaces irrumpen dramáticamente.
+
+::: {.video-container}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/psMMKgvpGfg?si=T-KsiZ8jtbOGQRj2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+:::
+
+---
+
+# El Partido de Fútbol de los Filósofos ⚽🧠
+
+## Grecia vs. Alemania en el Olympiastadion de Múnich
+
+Emitido el 18 de diciembre de 1972 en el programa *Monty Python's Fliegender Zirkus*, el sketch "International Philosophy" simula la transmisión televisiva de un partido de fútbol en el estadio olímpico de Múnich entre filósofos griegos y alemanes. El árbitro es **Confucio**, con San Agustín y Santo Tomás de Aquino (con aureolas) como jueces de línea, y **Martín Lutero** como director técnico alemán.
+
+Los filósofos deambulan por el campo absortos en sus pensamientos sin tocar el balón. Nietzsche recibe tarjeta amarilla por argumentar con el árbitro que no tiene libre albedrío. Al final, **Sócrates anota el único gol** —posiblemente en fuera de juego— y Grecia gana 1-0.
+
+::: {.callout-tip}
+Terry Jones explicó que el sketch trata sobre la "colisión de contrarios": el fútbol exige acción instintiva e inmediata, mientras que la filosofía exige reflexión profunda. Los mejores pensadores de la historia resultan incapaces de jugar un partido.
+:::
+
+::: {.video-container}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/i8ov2oNbkvo?si=SjeNxvthaQMAn9Ya" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+:::
+
+---
+
+# "Romani Ite Domum": El Grafiti en *La Vida de Brian* ✍️🏛️
+
+Brian intenta pintar un eslogan subversivo en el palacio del gobernador romano: **"ROMANES EUNT DOMUS"**. Es descubierto por un centurión (John Cleese) que, en lugar de ejecutarlo, actúa como un furibundo profesor de latín corrigiendo cada error gramatical con la espada en la garganta de Brian.
+
+Al amanecer, la pared entera aparece cubierta de **ROMANI ITE DOMUM** en perfecto latín, repetido cientos de veces.
+
+El sketch es filológicamente riguroso: todos los errores que corrige el centurión son gramaticalmente auténticos (vocativo plural, modo imperativo, caso acusativo de movimiento).
+
+::: {.video-container}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0lczHvB3Y9s?si=D7TBPugTmd7vJugz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+:::
+
+---
+
+# Terry Gilliam: El Python Detrás de la Cámara 🎬
+
+Terry Gilliam (Minneapolis, 1940) es el único Python no nacido en el Reino Unido. Dentro del grupo era el integrante más silencioso frente a la cámara pero el más visionario detrás de ella. Fue el responsable de las célebres **animaciones de recortes** que conectaban los sketches del Flying Circus.
+
+Tras los Pythons, Gilliam libró batallas épicas contra los estudios de Hollywood para llevar al cine su visión surrealista, distópica y fantástica.
+
+## Filmografía de Culto
+
+| Año | Película | Notas |
+|-----|----------|-------|
+| **1981** | Time Bandits | Su primer gran éxito independiente |
+| **1985** | Brazil | Obra maestra distópica; guerra legal con Universal por el final |
+| **1988** | Las aventuras del Barón Munchausen | Visualmente deslumbrante; fracasó en taquilla |
+| **1991** | The Fisher King | Oscar para Mercedes Ruehl |
+| **1995** | 12 Monkeys | Bruce Willis, Brad Pitt; éxito comercial y crítico |
+| **1998** | Fear and Loathing in Las Vegas | Fracasó en estreno; hoy es un clásico de culto |
+| **2009** | El Imaginario del Doctor Parnassus | Finalizada tras la muerte de Heath Ledger |
+| **2018** | El Hombre que Mató a Don Quijote | Proyecto de 25 años; el más maldito de su carrera |
+
+---
+
+# El SPAM: De la Carne Enlatada al Correo No Deseado 🥫
+![](https://ichef.bbci.co.uk/ace/ws/800/cpsprodpb/5251/production/_122237012_gettyimages-548777891.jpg.webp)
+
+
+## El Sketch Original
+
+Uno de los sketches más influyentes de Monty Python —en términos de impacto cultural— es el conocido como **"Spam"** (1970). En él, una pareja entra a un restaurante donde **absolutamente todos los platillos contienen SPAM** (la famosa carne de cerdo enlatada de la marca Hormel, popular en la Segunda Guerra Mundial).
+
+Los vikingos del restaurante comienzan a cantar una canción cada vez más enloquecedora: *"Spam, spam, spam, spam... Lovely spam! Wonderful spam!"*, hasta que la conversación se vuelve completamente imposible.
+
+::: {.video-container}
+<iframe src="https://www.youtube.com/embed/anwy2MPT5RE" title="Monty Python - SPAM Sketch" allowfullscreen></iframe>
+:::
+
+
+
+## El Origen de "Spam" en Internet
+
+::: {.spam-box}
+### 📧 ¿Cómo pasamos de la carne enlatada al correo basura?
+
+A principios de los años 1990, en los primeros foros de discusión en línea (especialmente en **Usenet** y **MUDs** —juegos de rol en red—), los usuarios bromistas comenzaron a inundar los canales de chat repitiendo la palabra "SPAM" repetidamente, tal como los vikingos en el sketch, hasta hacer imposible cualquier conversación.
+
+El término migró naturalmente a los primeros sistemas de correo electrónico. El primer caso documentado de correo no solicitado masivo data de **1994**, cuando los abogados Laurence Canter y Martha Siegel enviaron publicidad masiva a miles de grupos de Usenet.
+
+Desde entonces, **"spam"** pasó a denominar cualquier comunicación electrónica no solicitada, masiva e indeseada. Irónicamente, Monty Python —que inspiró también a Python el lenguaje— le dio también nombre a uno de los mayores problemas de seguridad de la era digital.
+:::
+
+::: {.callout-note}
+La compañía **Hormel Foods**, fabricante del SPAM original, tiene sentimientos encontrados sobre el uso de la palabra. Tolera su uso en contextos digitales, pero solicita que siempre se escriba en mayúsculas cuando se refiere al producto alimenticio: **SPAM** (el jamón) vs. **spam** (el correo basura).
+:::
+
+---
+
+# Guido van Rossum: El Benevolente Dictador Vitalicio 👑
+
+## El dictador benevolente
+![Gido van Rossum](http://images.contentful.com/qjy3jg1udcmq/32egrmksNqcaiASUKcm4G8/5b3556ffcbad9f6d5ce42c37f4b43561/Guido_van_Rossum1999.gif)
+
+## Datos Personales y Educación
+**Guido van Rossum** nació el **31 de enero de 1956** en Haarlem, Países Bajos. Estudió matemáticas e informática en la **Universidad de Ámsterdam**, donde obtuvo su maestría en 1982.
+
+### Trayectoria Profesional
+
+::: {.timeline-item}
+[**1982–1995**]{.year-badge} Trabaja en el **Centrum Wiskunde & Informatica (CWI)** en Ámsterdam, donde desarrolla Python como proyecto personal durante las vacaciones de Navidad de **1989**.
+:::
+
+::: {.timeline-item}
+[**1995**]{.year-badge} Se muda a Estados Unidos para trabajar en el **Corporation for National Research Initiatives (CNRI)** en Virginia.
+:::
+
+::: {.timeline-item}
+[**2000–2003**]{.year-badge} Se une a **BeOpen.com** y posteriormente a **Digital Creations** (que se convertiría en Zope Corporation).
+:::
+
+::: {.timeline-item}
+[**2005–2012**]{.year-badge} Trabaja en **Google**, donde dedica la mitad de su tiempo a mejorar Python dentro del ecosistema de la empresa.
+:::
+
+::: {.timeline-item}
+[**2013–2019**]{.year-badge} Se une a **Dropbox** como ingeniero principal.
+:::
+
+::: {.timeline-item}
+[**2018**]{.year-badge} Renuncia como **BDFL** (Benevolent Dictator For Life) tras un agotador debate sobre la sintaxis de las expresiones walrus (`:=`). Cita el estrés de las redes sociales como factor.
+:::
+
+::: {.timeline-item}
+[**2020**]{.year-badge} Se "aburre de jubilarse" y se une a la **División de Desarrolladores de Microsoft** para mejorar Python, especialmente en Windows.
+:::
+
+::: {.timeline-item}
+[**2025**]{.year-badge} Continúa activo en la comunidad Python, participa en el **Python Language Summit 2025** y defiende los valores de inclusión en el ecosistema de código abierto.
+:::
+
+## El BDFL: Un Liderazgo Único en la Historia del Software
+
+El título **"Benevolent Dictator For Life"** (Dictador Benevolente de por Vida) fue acuñado con humor para describir el estilo de liderazgo de Guido en Python. Aunque la comunidad tenía voz y voto, la decisión final siempre recaía en él.
+
+Este modelo funcionó durante casi **30 años**, lo que es extraordinario en el mundo del software de código abierto. La renuncia de Guido en 2018 representó un momento histórico: Python pasó a ser gobernado por un **Consejo Directivo** elegido por los desarrolladores principales.
+
+<div class="guido-quote">
+"Me di cuenta de que tenía que decidir sobre absolutamente todo, porque en última instancia cada idea terminaba en mi escritorio. Y pensé que esa responsabilidad debería ser compartida o transferida."
+— Guido van Rossum, 2019
+</div>
+
+---
+
+# Guido van Rossum: Posturas Políticas y Sociales 🗳️
+
+## Una Voz en Tiempos Convulsos
+
+Guido van Rossum no ha sido una figura políticamente silenciosa. Manteniendo su cuenta activa en **X (antes Twitter)** bajo el handle **@gvanrossum**, ha compartido públicamente su posición en debates que afectan a la comunidad tecnológica y de código abierto.
+
+## Defensa de la Diversidad e Inclusión (DEI) contra Políticas de Trump
+
+En octubre de 2025, la **Python Software Foundation (PSF)** tomó una decisión histórica: **rechazó una propuesta de subvención de $1.5 millones** de dólares de la Fundación Nacional de Ciencias (NSF) de Estados Unidos.
+
+La razón fue contundente: la administración Trump había añadido condiciones que exigían a la PSF **desmantelar sus programas de Diversidad, Equidad e Inclusión (DEI)** para poder recibir el financiamiento.
+
+::: {.callout-warning}
+### El dilema de la PSF
+La subvención estaba destinada a financiar mejoras críticas de seguridad en **PyPI** (el repositorio central de paquetes de Python), incluyendo un sistema automatizado de revisión de paquetes para prevenir ataques a la cadena de suministro de software. Rechazarla tuvo consecuencias reales para la seguridad del ecosistema.
+:::
+
+Guido van Rossum apoyó públicamente la decisión de la PSF, escribiendo en X:
+
+<div class="guido-quote">
+"If you haven't heard about this, kudos to the PSF for standing for its values (which are also my values)."
+("Si no has oído sobre esto, mis felicitaciones a la PSF por defender sus valores, que también son los míos.")
+— Guido van Rossum, octubre 2025
+</div>
+
+Además de publicar su apoyo, **realizó una donación personal** a la PSF en respuesta a la situación. La decisión desencadenó una ola de donaciones de la comunidad: el día del anuncio, la PSF recibió cerca de **300 nuevas donaciones**, y su página de donaciones llegó a colapsar por el tráfico.
+
+## Postura ante las Políticas Anti-DEI
+
+La posición de Guido es clara: los valores de inclusión y diversidad no son negociables para él, ni siquiera cuando el costo es financiero. Esta postura contrasta directamente con las políticas de la administración Trump, que en 2025 eliminó programas DEI en el gobierno federal y presionó a instituciones receptoras de fondos federales para hacer lo mismo.
+
+::: {.callout-note}
+## Contexto político
+La administración Trump (2025–) emitió órdenes ejecutivas que prohibieron programas DEI en agencias federales y condicionaron ayudas y subvenciones a instituciones externas al cumplimiento de estas restricciones. La PSF fue una de las primeras organizaciones de código abierto en rechazar públicamente este tipo de condicionamiento.
+:::
+
+---
+
+# La Creación de Python 🐍
+
+## Christmas 1989: El Nacimiento de un Lenguaje
+
+En diciembre de 1989, Guido van Rossum trabajaba en el CWI de Ámsterdam. Durante las **vacaciones de Navidad**, con la oficina prácticamente vacía, decidió embarcarse en un proyecto personal: crear un lenguaje de programación que fuera sucesor del lenguaje **ABC**.
+
+Su objetivo era crear algo que fuera:
+
+- **Legible** como el inglés simple
+- **Extensible** fácilmente
+- **Interactivo** para el usuario
+- **Divertido de usar** (de ahí el nombre de Monty Python)
+
+La primera versión pública, **Python 0.9.0**, fue lanzada en febrero de **1991** en el grupo de noticias `alt.sources`.
+
+```python
+# El "Hola Mundo" más histórico de Python
+# Tal como Guido lo habría escrito en 1991
+print("Hello, World!")
+```
+
+## El Zen de Python: La Filosofía del Lenguaje
+
+En 1999, Tim Peters escribió el famoso **"Zen of Python"**, una colección de 19 aforismos que guían el diseño del lenguaje. Se puede acceder a él desde el propio Python:
+
+```python
+import this
+```
+
+```
+The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+```
+
+::: {.callout-tip}
+La línea **"Although that way may not be obvious at first unless you're Dutch"** es un guiño humorístico al propio Guido van Rossum, quien es neerlandés (Dutch).
+:::
+
+---
+
+# Línea del Tiempo: Historia de Python 📅
+
+| Año | Evento |
+|-----|--------|
+| **1989** | Guido comienza a desarrollar Python en vacaciones de Navidad |
+| **1991** | Python 0.9.0: primera versión pública |
+| **1994** | Python 1.0: primera versión oficial con lambda, map, filter, reduce |
+| **2000** | Python 2.0: comprensión de listas, recolector de basura |
+| **2008** | Python 3.0: ruptura de compatibilidad, rediseño profundo del lenguaje |
+| **2018** | Guido renuncia como BDFL; se forma el Steering Council |
+| **2020** | Guido se une a Microsoft; fin del soporte oficial de Python 2 |
+| **2021** | Python supera a Java en el índice TIOBE por primera vez |
+| **2023** | Python lidera rankings globales impulsado por la IA |
+| **2025** | PSF rechaza subvención anti-DEI; Guido apoya públicamente la decisión |
+
+---
+
+# Python y la Revolución de la Inteligencia Artificial 🤖
+
+Python se ha convertido en el lenguaje dominante del aprendizaje automático y la inteligencia artificial. Bibliotecas como **TensorFlow**, **PyTorch**, **scikit-learn** y **Keras** han hecho de Python el idioma de la IA moderna.
+
+```python
+# Un ejemplo simple de machine learning con Python
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+# Datos de entrenamiento
+X = np.array([[1], [2], [3], [4], [5]])
+y = np.array([2, 4, 5, 4, 5])
+
+# Crear y entrenar el modelo
+modelo = LinearRegression()
+modelo.fit(X, y)
+
+# Predicción
+prediccion = modelo.predict([[6]])
+print(f"Predicción para x=6: {prediccion[0]:.2f}")
+```
+
+---
+
+# Curiosidades y Legado 🏆
+
+## El Nombre de las Versiones
+
+Las primeras versiones de Python tenían nombres en clave inspirados en personajes de Monty Python:
+
+- Muchas discusiones internas usaban referencias al **Caballero Negro**, al **Loro Noruego** y a la **Inquisición Española**.
+- La comunidad Python ha mantenido vivo este espíritu lúdico: el paquete de instalación de Python durante años se llamó **`python-dev`** en sistemas Debian, y la documentación oficial usa ejemplos con nombres como `spam`, `eggs` y `ham`.
+
+## spam, eggs y ham en el Código
+
+En la documentación oficial de Python, en lugar de usar los típicos `foo`, `bar`, `baz`, se utilizan **`spam`**, **`eggs`** y **`ham`** como nombres de variables de ejemplo, un homenaje perpetuo al sketch de Monty Python:
+
+```python
+# La convención oficial de Python para ejemplos
+def funcion_ejemplo(spam, eggs, ham="opcional"):
+    """
+    Esta convención de nombres viene directamente
+    del sketch de Monty Python.
+    """
+    return spam + eggs
+```
+
+## El PyPI y el Ecosistema
+
+El **Python Package Index (PyPI)** —el repositorio central de paquetes de Python— alberga hoy más de **500,000 proyectos**. Irónicamente, fue este mismo repositorio el que quedó en riesgo cuando la PSF rechazó la subvención anti-DEI de la administración Trump en 2025.
+
+---
+
+# Conclusión
+
+Python es mucho más que un lenguaje de programación. Es el reflejo de una filosofía: que la tecnología debe ser **clara, legible, inclusiva y, cuando sea posible, divertida**.
+
+Desde las navidades de 1989 en Ámsterdam, cuando Guido van Rossum eligió el nombre de su grupo cómico favorito para bautizar su nuevo lenguaje, hasta los debates actuales sobre inclusión y valores en la comunidad tecnológica, Python lleva en su ADN el espíritu irreverente de los vikingos cantando "Spam, spam, spam..." en un restaurante británico.
+
+Que un grupo de comediantes británicos haya dejado su huella en el lenguaje que hoy impulsa la inteligencia artificial es, quizás, la broma más pythonica de todas.
+
+::: {.callout-tip}
+## Para explorar más
+- 🌐 [Python.org — Sitio oficial](https://www.python.org)
+- 📖 [Historia de Python — Wikipedia](https://en.wikipedia.org/wiki/History_of_Python)
+- 🎬 [Monty Python en YouTube](https://www.youtube.com/@MontyPython)
+- 🐦 [Guido van Rossum en X](https://x.com/gvanrossum)
+:::
+
+---
+
+*Documento generado con [Quarto](https://quarto.org) • Contenido con fines educativos*
